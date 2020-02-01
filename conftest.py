@@ -5,15 +5,15 @@ from selenium import webdriver
 #данные о переменных browser_name и language из командной строки. по умолчанию запускается браузер chrome на англ языке 
 def pytest_addoption(parser):
     parser.addoption('--browser_name', action='store', default="chrome", help="Choose browser: chrome or firefox")
-    parser.addoption('--language', action='store', default="en", help ="Choose browser language: ru, en, fr...")
+    parser.addoption('--language', action='store', default=None, help="Choose browser language: ru, en, fr...")
 
 @pytest.fixture(scope="function")
 def browser(request):
 
 #значения переменных получены из командной строки
     browser_name=request.config.getoption("browser_name")
-    user_lng=request.config.getoption("language")  
-  
+    user_lng=request.config.getoption("language")
+
 #запуск локализации в зависимости от выбора браузера   
     if browser_name=="chrome":
         options = Options()

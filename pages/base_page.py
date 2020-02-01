@@ -17,6 +17,10 @@ class BasePage():
     def get_element_text(self, how, what):
         return self.browser.find_element(how, what).text
 
+    def go_to_basket_from_header(self):
+        btn_basket=self.browser.find_element(*BasePageLocators.BASKET_HEADER_LINK)
+        btn_basket.click()
+
     def go_to_login_page(self):
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
@@ -60,6 +64,10 @@ class BasePage():
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
 
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
